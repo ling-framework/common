@@ -1,9 +1,9 @@
 {
-    "name": "ling/ling-common",
+    "name": "ling-framework/common",
     "type": "framework",
     "description": "Legacy Is Not Good framework's common part",
     "keywords": ["framework", "configuration"],
-    "homepage": "https://github.com/fri13th/ling-common",
+    "homepage": "https://github.com/ling-framework/common",
     "license": "MIT",
     "authors": [
         {

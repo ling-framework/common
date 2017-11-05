@@ -22,8 +22,9 @@ if (!function_exists('config')) {
 }
 
 if (!function_exists('hook')) {
-    function hook($hook_id, $args) {
+    function hook($hook_id, $args = null) {
         $hooks = config($hook_id);
+        if ($args == null) $args = array();
         if ($hooks && is_array($args)) {
             foreach ($hooks as $hook) {
                 call_user_func_array($hook, $args);
@@ -51,3 +52,9 @@ if (!function_exists('session')) {
     }
 }
 
+if (!function_exists('cookie')) {
+    // we don't provide setcookie, because there's built-in setcookie
+    function cookie($key) {
+        return isset($_COOKIE[$key]) ? $_COOKIE[$key] : "";
+    }
+}
