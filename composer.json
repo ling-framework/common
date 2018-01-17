@@ -18,8 +18,7 @@
     },
     "autoload": {
         "files": [
-            "src/Ling/common.php",
-            "src/Ling/util.php"
+            "src/Ling/common.php"
         ],
         "psr-4": {"Ling\\": "src/Ling"}
     },

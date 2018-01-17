@@ -17,8 +17,8 @@ function config($key, $default = null) {
         return null;
     }
 
-    if (startsWith($key, 'env.')) { // if some config starts with env, get variable from env
-        return getenv(substr($key, 4));
+    if (!strncmp($key, 'env.', 4)) { // if some config starts with env, get variable from env
+        return getenv(substr($key, 4)) ?: $default;
     }
     return isset($CONFIG[$key]) ? $CONFIG[$key] : $default;
 }
