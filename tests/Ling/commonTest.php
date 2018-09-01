@@ -7,14 +7,14 @@ class commonTest extends TestCase
 {
     public $hook_result;
 
-    public function testConfig() {
-        config(array('123' => '456'));
-        $this->assertSame(config('123'), '456');
+    public function testEnv() {
+        env(array('123' => '456'));
+        $this->assertSame(env('123'), '456');
     }
 
-    public function testEnvConfig() { // we need to add env test
+    public function testEnvVar() { // we need to add env test
         putenv('LING_ENV=dev');
-        $this->assertSame(config('env.LING_ENV'), 'dev');
+        $this->assertSame(env('env.LING_ENV'), 'dev');
     }
 
     public function testHook() {

@@ -1,31 +1,30 @@
 <?php
 
 namespace Ling;
-use function Ling\startsWith;
 
-$GLOBALS['LING_CONFIG'] = array();
+$GLOBALS['LING_ENV'] = array();
 
-function config($key, $default = null) {
+function env($key, $default = null) {
 
-    $CONFIG = $GLOBALS['LING_CONFIG'];
+    $ENV = $GLOBALS['LING_ENV'];
 
     if (is_array($key)) {
         foreach($key as $k => $v) {
-            $CONFIG[$k] = $v;
+            $ENV[$k] = $v;
         }
-        $GLOBALS['LING_CONFIG'] = $CONFIG;
+        $GLOBALS['LING_ENV'] = $ENV;
         return null;
     }
 
-    if (!strncmp($key, 'env.', 4)) { // if some config starts with env, get variable from env
+    if (!strncmp($key, 'env.', 4)) { //  get variable from env
         return getenv(substr($key, 4)) ?: $default;
     }
-    return isset($CONFIG[$key]) ? $CONFIG[$key] : $default;
+    return isset($ENV[$key]) ? $ENV[$key] : $default;
 }
 
 function hook($hook_id, $args = array()) {
     /** @var array $hooks */
-    $hooks = config($hook_id);
+    $hooks = env($hook_id);
     if ($hooks && is_array($args)) {
         foreach ($hooks as $hook) {
             call_user_func_array($hook, $args);
@@ -36,7 +35,7 @@ function hook($hook_id, $args = array()) {
             $hooks = array();
         }
         $hooks[] = $args;
-        config(array($hook_id => $hooks));
+        env(array($hook_id => $hooks));
     }
 }
 
